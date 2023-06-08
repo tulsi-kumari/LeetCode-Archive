@@ -4,12 +4,19 @@ class Solution {
         int m=grid[0].length;
         int ans=0;
         for(int[] row:grid){
-            int j=0;
-            while(j<m && row[j]>=0){
-                j++;
+            int i=0;
+            int j=m-1;
+            int tempAns=m;
+            while(i<=j){
+                int mid=i+(j-i)/2;
+                if(row[mid]<0){
+                    tempAns=mid;
+                    j=mid-1;
+                }else{
+                    i=mid+1;;
+                }
             }
-            
-            ans+=m-j;
+            ans+=m-tempAns;
         }
         
         return ans;
