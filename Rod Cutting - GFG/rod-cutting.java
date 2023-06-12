@@ -28,22 +28,23 @@ class RodCutting {
 class Solution{
     public int cutRod(int price[], int n) {
         //code here
-        int[][] dp=new int[price.length+1][n+1];
-        for(int[] i:dp){
-            Arrays.fill(i,-1);
+        int[] dp=new int[price.length+1];
+        dp[0]=0;
+        for(int i=1;i<dp.length;i++){
+            int max=price[i-1];
+            
+            for(int j=1;j<=i/2;j++){
+                
+                max=Math.max(max,dp[j]+dp[i-j]);
+                //System.out.print(max + " ");
+            }
+            //System.out.println();
+            dp[i]=max;
         }
-        return help(0,price,n,dp);
+       // System.out.println(Arrays.toString(dp));
+        
+        return dp[price.length];
+       
     }
-    public int help(int i,int[] price,int target,int[][] dp){
-        if(i==price.length||target<=0){
-            return 0;
-        }
-        if(dp[i][target]!=-1){
-            return dp[i][target];
-        }
-        if(i+1<=target){
-            return dp[i][target] = Math.max(price[i]+help(i,price,target-i-1,dp),help(i+1,price,target,dp));
-        }
-        return dp[i][target] = help(i+1,price,target,dp);
-    } 
+
 }
