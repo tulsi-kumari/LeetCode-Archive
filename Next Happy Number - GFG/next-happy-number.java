@@ -35,7 +35,8 @@ class Solution{
     }
     public static boolean isHappyNumber(int n){
         HashSet<Integer> set=new HashSet<>();
-        while(!set.contains(n)){
+        int count=6;
+        while(count!=0){
             set.add(n);
             int temp=0;
             while(n!=0){
@@ -43,6 +44,7 @@ class Solution{
                 n=n/10;
             }
             n=temp;
+            count--;
         }
         if(n==1){
             return true;
