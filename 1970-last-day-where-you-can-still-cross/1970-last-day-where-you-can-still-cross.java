@@ -13,17 +13,7 @@ class Solution {
         return binSearch(0,cells.length-1,cells,col,row);
     }
     public int binSearch(int s,int e,int[][] cells,int col,int row){
-        if(s==e){
-            int[][] mat=new int[row][col];
-            for(int i=0;i<=s;i++){
-              mat[cells[i][0]-1][cells[i][1]-1]=1;
-            }
-            if(!bfs(mat)){
-                return s;
-            }else{
-                return s+1;
-            }
-        }
+        
         if(s>e){
             return s;
         }
