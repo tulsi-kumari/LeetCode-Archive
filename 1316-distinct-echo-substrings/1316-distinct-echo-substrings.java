@@ -15,9 +15,11 @@ class Solution {
     }
     public void isValid(String s){
         for(int i=1;i<=s.length()/2;i++){
-            if(s.substring(0,i).equals(s.substring(i,2*i))){
-                if(!set.contains(s.substring(0,i))){
-                    set.add(s.substring(0,i));
+            String fir=s.substring(0,i);
+            String sec=s.substring(i,2*i);
+            if(fir.equals(sec)){
+                if(!set.contains(fir)){
+                    set.add(fir);
                 }
             }
         }
