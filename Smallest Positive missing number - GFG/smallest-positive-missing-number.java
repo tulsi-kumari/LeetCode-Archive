@@ -10,41 +10,22 @@ class Solution
     static int missingNumber(int arr[], int size)
     {
         // Your code here
-        HashSet<Integer> set=new HashSet<>();
-        for(int num:arr){
-            if(num>0){
-                set.add(num);
+        int i=0;
+        while(i<size){
+            if(arr[i]<size && arr[i]>0 && arr[i]!=arr[arr[i]-1]){
+                int temp=arr[arr[i]-1];
+                arr[arr[i]-1]=arr[i];
+                arr[i]=temp;
+            }else{
+                i++;
             }
         }
-        for(int i=1;i<=size+1;i++){
-            if(!set.contains(i)){
-                return i;
+        for(int j=0;j<size;j++){
+            if(arr[j]!=j+1){
+                return j+1;
             }
         }
-        return size+2;
-        // int j=0;
-        // int pos=1;
-        // Arrays.sort(arr);
-        // while(j<size && arr[j]<=0){
-        //     j++;
-        // }
-        // //System.out.println(Arrays.toString(arr));
-        // //System.out.println(arr[j]+" "+j);
-        // if(j==size){
-        //     return pos;
-        // }
-        // int i=j;
-        // while(i<size){
-        //     if(arr[i]==pos){
-        //         while(i<size && arr[i]==pos){
-        //         i++;
-        //         }
-        //         pos++;
-        //     }else{
-        //         return pos;
-        //     }
-        // }
-        // return pos;
+        return size+1;
     }
 }
 
