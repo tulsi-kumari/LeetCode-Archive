@@ -12,7 +12,9 @@ class Solution
         // Your code here
         HashSet<Integer> set=new HashSet<>();
         for(int num:arr){
-            set.add(num);
+            if(num>0){
+                set.add(num);
+            }
         }
         for(int i=1;i<=size+1;i++){
             if(!set.contains(i)){
@@ -26,13 +28,17 @@ class Solution
         // while(j<size && arr[j]<=0){
         //     j++;
         // }
-        // System.out.println(Arrays.toString(arr));
-        // System.out.println(arr[j]+" "+j);
+        // //System.out.println(Arrays.toString(arr));
+        // //System.out.println(arr[j]+" "+j);
         // if(j==size){
         //     return pos;
         // }
-        // for(int i=j;i<size;i++){
+        // int i=j;
+        // while(i<size){
         //     if(arr[i]==pos){
+        //         while(i<size && arr[i]==pos){
+        //         i++;
+        //         }
         //         pos++;
         //     }else{
         //         return pos;
