@@ -21,16 +21,14 @@ class Solution {
                 }
             
              //System.out.println(mid+" "+currtime);
-            if(currtime<h){
-                e=mid-1;
-            }else if(currtime>h){
+            if(currtime>h){
                 s=mid+1;
             }else{
                 ans=Math.min(ans,mid);
                 e=mid-1;
             }
         }
-        return (ans==Integer.MAX_VALUE?s:ans);
+        return ans;
     }
 //     int left = 1;
 //         int right = Integer.MIN_VALUE;
