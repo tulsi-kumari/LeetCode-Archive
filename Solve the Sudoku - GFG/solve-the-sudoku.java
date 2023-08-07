@@ -44,10 +44,37 @@ class Driver_class
 
 class Solution
 {
+   static HashMap<Integer,HashSet<Integer>> row;
+   static HashMap<Integer,HashSet<Integer>> col;
+   static HashMap<Integer,HashSet<Integer>> gri;
     //Function to find a solved Sudoku. 
     static boolean SolveSudoku(int grid[][])
     {
         // add your code here
+        row=new HashMap<>();
+        col=new HashMap<>();
+        gri=new HashMap<>();
+        for(int i=0;i<9;i++)
+        {
+            row.put(i,new HashSet<>());
+            col.put(i,new HashSet<>());
+            gri.put(i,new HashSet<>());
+        }
+        
+        int n=grid.length;
+        int m=grid[0].length;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(grid[i][j]!=0)
+                {
+                    row.get(i).add(grid[i][j]);
+                    col.get(j).add(grid[i][j]);
+                    gri.get(3*(i/3)+j/3).add(grid[i][j]);
+                }
+            }
+        }
         boolean ret= solve(0,0,grid);
         //printGrid(grid);
         return ret;
@@ -77,11 +104,17 @@ class Solution
                 {
                     grid[x][y]=k;
                     //System.out.print(grid[x][y]+"hello");
+                    row.get(x).add(k);
+                    col.get(y).add(k);
+                    gri.get(3*(x/3)+y/3).add(k);
                     boolean ret=solve(nr,nc,grid);
                     if(ret)
                     {
                         return true;
                     }
+                    row.get(x).remove(k);
+                    col.get(y).remove(k);
+                    gri.get(3*(x/3)+y/3).remove(k);
                     grid[x][y]=0;
                 }
             }
@@ -96,24 +129,37 @@ class Solution
         return false;
     }
     static boolean isValid(int x,int i,int j,int[][] grid)
-    {   
-        for(int k=0;k<9;k++)
+    {
+        if(row.get(i).contains(x))
         {
-            if(grid[i][k]==x)
-            {
-                return false;
-            }
-            if(grid[k][j]==x)
-            {
-                return false;
-            }
-            if(grid[3*(i/3)+k/3][3*(j/3)+k%3]==x)
-            {
-                return false;
-            }
+            return false;
         }
-        
+        if(col.get(j).contains(x))
+        {
+            return false;
+        }
+        if(gri.get(3*(i/3)+j/3).contains(x))
+        {
+            return false;
+        }
         return true;
+        // for(int k=0;k<9;k++)
+        // {
+        //     if(grid[i][k]==x)
+        //     {
+        //         return false;
+        //     }
+        //     if(grid[k][j]==x)
+        //     {
+        //         return false;
+        //     }
+        //     if(grid[3*(i/3)+k/3][3*(j/3)+k%3]==x)
+        //     {
+        //         return false;
+        //     }
+        // }
+        
+        //return true;
     }
     
     //Function to print grids of the Sudoku.
