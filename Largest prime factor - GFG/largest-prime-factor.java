@@ -28,7 +28,7 @@ class Solution{
     static long largestPrimeFactor(int N) {
         // code here
         long ans=1;
-        for(int i=2;i<=Math.sqrt(N);i++)
+        for(int i=2;(i*i)<=N;i++)
         {
             if(N%i==0)
             {
