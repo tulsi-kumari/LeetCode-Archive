@@ -14,14 +14,11 @@ class Solution {
                 if(!flag)
                 {
                     ans[j]=deck[i];
-                    i++;
-                    flag=true;
-                    
-                }else
-                {
-                    flag=false;
+                    i++;  
                 }
+                flag=!flag;
             }
+            
             j=(j+1)%n;
         }
         return ans;
